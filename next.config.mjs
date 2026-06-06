@@ -6,7 +6,7 @@ const nextConfig = {
     },
     trailingSlash: true,
     basePath: process.env.NODE_ENV === "production"
-        ? "/harshN26.github.io"
+        ? "/harshn26.github.io"
         : ""
 };
 
