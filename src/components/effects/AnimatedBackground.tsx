@@ -10,29 +10,26 @@ export default function AnimatedBackground() {
         if (!el) return;
 
         let angle = 0;
+        let frameId: number;
 
         const animate = () => {
-            angle += 0.3;
+            angle += 0.2;
 
             el.style.background = `
-        radial-gradient(circle at ${50 + Math.sin(angle * 0.01) * 20}% ${50 + Math.cos(angle * 0.01) * 20}%,
-        rgba(99,102,241,0.25),
-        transparent 60%),
-        radial-gradient(circle at ${50 + Math.cos(angle * 0.015) * 20}% ${50 + Math.sin(angle * 0.015) * 20}%,
-        rgba(236,72,153,0.2),
-        transparent 60%)
-      `;
+                radial-gradient(circle at ${50 + Math.sin(angle * 0.01) * 20}% ${50 + Math.cos(angle * 0.01) * 20}%,
+                rgba(99,102,241,0.20),
+                transparent 60%),
+                radial-gradient(circle at ${50 + Math.cos(angle * 0.015) * 20}% ${50 + Math.sin(angle * 0.015) * 20}%,
+                rgba(236,72,153,0.15),
+                transparent 60%)
+            `;
 
-            requestAnimationFrame(animate);
+            frameId = requestAnimationFrame(animate);
         };
 
         animate();
+        return () => cancelAnimationFrame(frameId);
     }, []);
 
-    return (
-        <div
-            ref={ref}
-            className="fixed inset-0 -z-20 pointer-events-none"
-        />
-    );
+    return <div ref={ref} className="fixed inset-0 z-0 pointer-events-none" />;
 }

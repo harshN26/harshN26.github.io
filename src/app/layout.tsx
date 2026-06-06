@@ -3,13 +3,20 @@ import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+
 import AnimatedBackground from "@/components/effects/AnimatedBackground";
+import GlowOrb from "@/components/effects/GlowOrb";
 import ParticleField from "@/components/effects/ParticleField";
+import FloatingIllustrations from "@/components/illustrations/FloatingIllustrations";
+import Container from "@/components/ui/Container";
+import { site } from "@/data/site";
 
 export const metadata: Metadata = {
-    title: "Harsh Nihalani",
-    description:
-        "Electrical & Computer Engineering Portfolio",
+    title: {
+        default: site.name,
+        template: `%s | ${site.name}`,
+    },
+    description: `${site.tagline} ${site.description}`,
 };
 
 export default function RootLayout({
@@ -19,19 +26,17 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="bg-background text-foreground overflow-x-hidden">
-                {/* Background Effects */}
+            <body className="min-h-screen bg-black text-white antialiased">
                 <AnimatedBackground />
+                <GlowOrb />
                 <ParticleField />
+                <FloatingIllustrations />
 
-                {/* Main Site */}
-                <div className="relative z-10 min-h-screen flex flex-col">
+                <div className="relative z-10 flex min-h-screen flex-col">
                     <Navbar />
-
                     <main className="flex-1">
-                        {children}
+                        <Container>{children}</Container>
                     </main>
-
                     <Footer />
                 </div>
             </body>
